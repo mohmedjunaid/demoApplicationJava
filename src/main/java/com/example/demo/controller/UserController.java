@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.annotation.ApiRestController;
+import com.example.demo.request.ConfirmationRequest;
 import com.example.demo.request.RegistrationRequest;
+import com.example.demo.response.ConfirmationResponse;
 import com.example.demo.response.RegistrationResponse;
 import com.example.demo.service.UserService;
 
@@ -28,5 +30,11 @@ public class UserController extends BaseController{
 	@PostMapping("/registration")
 	public ResponseEntity<RegistrationResponse> registration(@RequestBody RegistrationRequest registrationRequest,@RequestHeader(value = "Origin", required = false) String origin) {
 		return new ResponseEntity<RegistrationResponse>(userService.registerUser(registrationRequest,origin), HttpStatus.OK);
+	}
+	
+	@PostMapping("/confirmation")
+	public ResponseEntity<ConfirmationResponse> confirmation(@RequestBody ConfirmationRequest confirmationRequest) {
+		System.out.println("gg");
+		return new ResponseEntity<ConfirmationResponse>(userService.confirmation(confirmationRequest), HttpStatus.OK);
 	}
 }

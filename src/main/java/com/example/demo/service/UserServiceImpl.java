@@ -17,9 +17,11 @@ import com.example.demo.entity.User;
 import com.example.demo.entity.UserRole;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.repository.UserRoleRepository;
+import com.example.demo.request.ConfirmationRequest;
 import com.example.demo.request.LoginRequest;
 import com.example.demo.request.RegistrationRequest;
 import com.example.demo.response.BaseResponse;
+import com.example.demo.response.ConfirmationResponse;
 import com.example.demo.response.LoginResponse;
 import com.example.demo.response.RegistrationResponse;
 
@@ -95,6 +97,12 @@ public class UserServiceImpl implements UserService{
 			response.setStatus(ResponseStatus.FAILURE);
 			return response;
 		}
+	}
+
+	@Override
+	public ConfirmationResponse confirmation(ConfirmationRequest confirmationRequest) {
+		System.out.println("service");
+		return null;
 	}
 
 }

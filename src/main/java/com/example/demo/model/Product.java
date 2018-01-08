@@ -4,6 +4,7 @@ public class Product {
 	private String productName;
 	private String productImage;
 	private String productPrice;
+	private String productURL;
 	public String getProductName() {
 		return productName;
 	}
@@ -21,6 +22,12 @@ public class Product {
 	}
 	public void setProductPrice(String productPrice) {
 		this.productPrice = productPrice;
+	}
+	public String getProductURL() {
+		return productURL;
+	}
+	public void setProductURL(String productURL) {
+		this.productURL = productURL;
 	}
 	
 }

@@ -7,9 +7,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-/**
- * Created by babu.kannar@indianic.com on 10/11/2016.
- */
 @Component
 public class EncryptorServiceImpl implements EncryptorService {
 

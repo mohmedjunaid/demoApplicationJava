@@ -35,43 +35,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 
-				.authorizeRequests()
-				 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+				.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
-				.antMatchers(HttpMethod.GET, "/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js",
-						"/images/users/**/profilePic*.*")
-				.permitAll()
-				.antMatchers("/api/registration/**", "/api/login/**","/api/getProducts/**")
+				.antMatchers(HttpMethod.GET, "/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js", "/images/users/**/profilePic*.*")
 				
-				.permitAll().antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll().anyRequest().authenticated();
+				.permitAll()
+				
+				.antMatchers("/api/registration/**", "/api/login/**","/api/getProducts/**","/api/getProductDetail/**")
+				
+				.permitAll().antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
+				
+				.anyRequest().authenticated();
 
 		httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 
 		httpSecurity.headers().cacheControl();
 
-		/*
-		 * httpSecurity .csrf().disable()
-		 * 
-		 * .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-		 * 
-		 * .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).
-		 * and()
-		 * 
-		 * .authorizeRequests()
-		 */
-
-		// .antMatchers(HttpMethod.GET, "/", "/*.html", "/favicon.ico", "/**/*.html",
-		// "/**/*.css", "/**/*.js","/images/users/**/profilePic*.*")
-		// .permitAll().antMatchers("/api/registaration/**",
-		// "/api/login/**").permitAll()
-		// .antMatchers(HttpMethod.OPTIONS,
-		// "/api/**").permitAll().anyRequest().authenticated();
-
-		/*
-		 * httpSecurity.addFilterBefore(authenticationTokenFilterBean(),
-		 * UsernamePasswordAuthenticationFilter.class);
-		 * 
-		 * httpSecurity.headers().cacheControl();
-		 */
 	}
 }

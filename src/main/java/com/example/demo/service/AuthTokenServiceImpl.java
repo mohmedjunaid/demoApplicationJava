@@ -16,14 +16,12 @@ import com.example.demo.entity.Login;
 import com.example.demo.entity.Role;
 import com.example.demo.entity.User;
 import com.example.demo.repository.LoginRepository;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.util.DateTimeUtils;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by babu.kannar@indianic.com on 10/11/2016.
- */
 @Component
 public class AuthTokenServiceImpl implements AuthTokenService  {
 
@@ -36,6 +34,8 @@ public class AuthTokenServiceImpl implements AuthTokenService  {
 
     private LoginRepository loginRepository;
 
+    @Autowired
+    private UserRepository userRepository;
     @Autowired
     public AuthTokenServiceImpl(EncryptorService encryptorService, LoginRepository loginRepository) {
         cacheManager = CacheManagerBuilder.newCacheManagerBuilder()
@@ -111,7 +111,8 @@ public class AuthTokenServiceImpl implements AuthTokenService  {
             AuthInfo authInfo2 = AuthInfo.parse(decryptToken);
             authInfo2.setToken(token);
             if(authInfo2 != null) {
-                Login login = loginRepository.findByUserIdAndToken(authInfo2.getUserId(), token);
+            	User user=userRepository.findById(authInfo2.getUserId());
+                Login login = loginRepository.findByUserIdAndToken(user, token);
                 if(login != null) {
                     tokenCache.put(token, authInfo2);
                 } else {

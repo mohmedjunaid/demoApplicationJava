@@ -6,9 +6,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import com.example.demo.entity.AuthInfo;
 import com.example.demo.service.AuthTokenService;
 
-/**
- * Created by Kishan Maheshwary on 2/20/2017.
- */
 public abstract class BaseController {
 
     protected String getAuthToken() {
