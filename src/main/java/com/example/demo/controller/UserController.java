@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.annotation.ApiRestController;
 import com.example.demo.request.ConfirmationRequest;
 import com.example.demo.request.RegistrationRequest;
+import com.example.demo.request.VerificationRequest;
 import com.example.demo.response.ConfirmationResponse;
 import com.example.demo.response.RegistrationResponse;
+import com.example.demo.response.VerificationResponse;
 import com.example.demo.service.UserService;
 
 @ApiRestController
@@ -36,5 +38,10 @@ public class UserController extends BaseController{
 	public ResponseEntity<ConfirmationResponse> confirmation(@RequestBody ConfirmationRequest confirmationRequest) {
 		System.out.println("gg");
 		return new ResponseEntity<ConfirmationResponse>(userService.confirmation(confirmationRequest), HttpStatus.OK);
+	}
+	
+	@PostMapping("/verification")
+	public ResponseEntity<VerificationResponse> verification(@RequestBody VerificationRequest verificationRequest) {
+		return new ResponseEntity<VerificationResponse>(userService.verification(verificationRequest), HttpStatus.OK);
 	}
 }

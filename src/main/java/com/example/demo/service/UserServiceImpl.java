@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
+import com.example.demo.entity.Otp;
 import com.example.demo.entity.ResponseStatus;
 import com.example.demo.entity.Role;
 import com.example.demo.entity.User;
@@ -20,10 +21,12 @@ import com.example.demo.repository.UserRoleRepository;
 import com.example.demo.request.ConfirmationRequest;
 import com.example.demo.request.LoginRequest;
 import com.example.demo.request.RegistrationRequest;
+import com.example.demo.request.VerificationRequest;
 import com.example.demo.response.BaseResponse;
 import com.example.demo.response.ConfirmationResponse;
 import com.example.demo.response.LoginResponse;
 import com.example.demo.response.RegistrationResponse;
+import com.example.demo.response.VerificationResponse;
 
 @Component
 public class UserServiceImpl implements UserService{
@@ -39,6 +42,12 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private AuthTokenService authTokenService;
+	
+	@Autowired
+	private MailService mailService;
+	
+	@Autowired
+	private LoginService loginService;
 	
 	@Override
 	public RegistrationResponse registerUser(RegistrationRequest registrationRequest , String origin) {
@@ -75,12 +84,16 @@ public class UserServiceImpl implements UserService{
 				userRole.setUserId(user);
 				userRoleRepository.save(userRole);
 				
+				loginService.createOtp(user.getEmail());
+				
 				String authToken = authTokenService.generateToken(origin, user.getId(), Role.USER, registrationRequest.getPassword());
 				
 				response.setToken(authToken);
 				response.setUserId(user.getId());
+				response.setEmail(user.getEmail());
 				response.setAlreadyRegistered(false);
 				response.setStatus(ResponseStatus.SUCCESS);
+				
 				return response;
 			} else {
 				List<String> message = new ArrayList<>();
@@ -105,4 +118,13 @@ public class UserServiceImpl implements UserService{
 		return null;
 	}
 
+	@Override
+	public VerificationResponse verification(VerificationRequest verificationRequest) {
+		VerificationResponse response=new VerificationResponse();
+		System.out.println("servicess");
+	
+		response.setStatus(ResponseStatus.SUCCESS);
+		return response;
+	}
+	
 }

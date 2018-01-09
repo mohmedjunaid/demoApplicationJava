@@ -10,4 +10,5 @@ public interface LoginService {
 
 	LoginResponse loginUser(LoginRequest loginRequest, String origin);
 
+	void createOtp(String email);
 }

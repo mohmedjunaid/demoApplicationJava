@@ -4,6 +4,8 @@ public class LoginResponse extends BaseResponse{
 	private Integer userId;
 	private String token;
 	private String role;
+	private String email;
+	private Boolean active;
 	public Integer getUserId() {
 		return userId;
 	}
@@ -21,6 +23,18 @@ public class LoginResponse extends BaseResponse{
 	}
 	public void setRole(String role) {
 		this.role = role;
+	}
+	public Boolean getActive() {
+		return active;
+	}
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 }
