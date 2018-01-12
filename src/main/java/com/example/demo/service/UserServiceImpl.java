@@ -84,7 +84,16 @@ public class UserServiceImpl implements UserService{
 				userRole.setUserId(user);
 				userRoleRepository.save(userRole);
 				
-				loginService.createOtp(user.getEmail());
+				boolean otpSent= loginService.createOtp(user.getEmail());
+				
+				if(otpSent==false) {
+					List<String> message = new ArrayList<>();
+					message.add(messageSource.getMessage("email.couldnot.sent", null, null));
+					response.setMessages(message);
+					response.setEmailSent(false);
+				}else if (otpSent==true) {
+					response.setEmailSent(true);
+				}
 				
 				String authToken = authTokenService.generateToken(origin, user.getId(), Role.USER, registrationRequest.getPassword());
 				
@@ -120,11 +129,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public VerificationResponse verification(VerificationRequest verificationRequest) {
-		VerificationResponse response=new VerificationResponse();
-		System.out.println("servicess");
-	
-		response.setStatus(ResponseStatus.SUCCESS);
-		return response;
+		return loginService.verifyOtp(verificationRequest);
 	}
 	
 }

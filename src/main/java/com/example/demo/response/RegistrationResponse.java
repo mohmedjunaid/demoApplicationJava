@@ -5,6 +5,7 @@ public class RegistrationResponse extends BaseResponse{
 	private Integer userId;
 	private String email;
 	private String token;
+	private Boolean emailSent;
 	public Boolean getAlreadyRegistered() {
 		return alreadyRegistered;
 	}
@@ -28,6 +29,12 @@ public class RegistrationResponse extends BaseResponse{
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public Boolean getEmailSent() {
+		return emailSent;
+	}
+	public void setEmailSent(Boolean emailSent) {
+		this.emailSent = emailSent;
 	}
 	
 }

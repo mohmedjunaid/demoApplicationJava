@@ -6,6 +6,7 @@ public class LoginResponse extends BaseResponse{
 	private String role;
 	private String email;
 	private Boolean active;
+	private Boolean emailSent;
 	public Integer getUserId() {
 		return userId;
 	}
@@ -36,5 +37,10 @@ public class LoginResponse extends BaseResponse{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+	public Boolean getEmailSent() {
+		return emailSent;
+	}
+	public void setEmailSent(Boolean emailSent) {
+		this.emailSent = emailSent;
+	}
 }

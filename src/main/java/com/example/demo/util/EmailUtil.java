@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
+import javax.mail.AuthenticationFailedException;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -45,12 +46,17 @@ public class EmailUtil {
 
 			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
 			System.out.println("Message is ready");
-			Transport.send(msg);
+			try {
+				Transport.send(msg);
+			} catch (AuthenticationFailedException e) {
+				return false;
+			}
+			
 
 			System.out.println("EMail Sent Successfully!!");
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 			return false;
 		}
 	}
