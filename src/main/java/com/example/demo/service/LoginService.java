@@ -15,4 +15,6 @@ public interface LoginService {
 	boolean createOtp(String email);
 
 	VerificationResponse verifyOtp(VerificationRequest verificationRequest);
+
+	VerificationResponse resendOtp(String email);
 }

@@ -152,4 +152,22 @@ public class LoginServiceImpl implements LoginService {
 			return response;
 		}
 	}
+
+	@Override
+	public VerificationResponse resendOtp(String email) {
+		VerificationResponse response=new VerificationResponse();
+		boolean otpCreated = loginService.createOtp(email);
+		if (otpCreated==true) {
+			response.setStatus(ResponseStatus.SUCCESS);
+			response.setVerified(otpCreated);
+			return response;
+		}else {
+			response.setStatus(ResponseStatus.SUCCESS);
+			response.setVerified(otpCreated);
+			List<String> message = new ArrayList<>();
+			message.add(messageSource.getMessage("email.couldnot.sent", null, null));
+			response.setMessages(message);
+			return response;
+		}
+	}
 }
